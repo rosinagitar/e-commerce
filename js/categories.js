@@ -37,14 +37,16 @@ function sortCategories(criteria, array){
 
 function showCategoriesList(){
 
-    let htmlContentToAppend = "";
+    let htmlContentToAppend = ""; //Se recorre el arreglo de categorías. Inicia el contador.  
     for(let i = 0; i < currentCategoriesArray.length; i++){
         let category = currentCategoriesArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){ //El if indica si está entre el mínimo y el máximo.
 
-            htmlContentToAppend += `
+            //Si lo anterior devuelve verdadero, el resultado se agrega al HTML.
+            //Se agregan los valores del objeto dentro de un Div (imagen, descripción, etc...) 
+            htmlContentToAppend += ` 
             <a href="category-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
@@ -62,7 +64,7 @@ function showCategoriesList(){
             `
         }
 
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend; // Se llama al Div cat-list-container del HTML y se le agrega todos los valores contenidos en htmlContentToAppend
     }
 }
 
