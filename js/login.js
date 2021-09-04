@@ -10,8 +10,15 @@ function checkUsernameAndPassword(){
     let password = document.getElementById("password").value;
 
     if((username !=="") && (password !=="")){
+        setUser();
         window.location.href="home.html";
     } else {
         alert("Debe completar ambos campos");
     }
+}
+
+/*Con esta función guardo el nombre de usuario en el navegador*/
+function setUser(){
+    let name = document.getElementById("username").value;
+    localStorage.setItem("username", name);
 }
