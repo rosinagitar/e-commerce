@@ -139,3 +139,32 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+#cuerpo {
+  margin-top: 0px;
+}
+
+#puntaje {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.navbar-expand-lg {
+  font-family: 'Raleway';
+}
+
+.navbar-brand {
+  font-size: 33px;
+}
+
+.text-center {
+  font-family: 'Raleway';
+}
+
+.btn {
+  color: #0087F7;
+  border-color: #0087F7;
+}
+
+.btn-outline-success:hover{color:#fff;background-color: #0087F7;border-color:#0087F7}
+

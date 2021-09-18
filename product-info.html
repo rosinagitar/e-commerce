@@ -10,30 +10,142 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
 <body>
-  <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="home.html">Inicio</a>
-      <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-      <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-      <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <a class="py-2 d-none d-md-inline-block" href="#" id="user"></a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">e-mercado</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">Mi carrito</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+      </div>
+      <div id="user">
+      </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <main role="main" class="pb-5">
+    <div class="container mt-5">
+      <h2 id="prodName"></h2>
+      <hr class="my-3">
+      <br>
+      <dl>
+        <dt>Imágenes ilustrativas</dt>
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="img/prod1.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img/prod1_1.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img/prod1_2.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img/prod1_3.jpg" alt="Fourth slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img/prod1_4.jpg" alt="Fifth slide">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <br>
+
+        <dt>Categoría</dt>
+        <dd>
+          <p id="prodCategory"></p>
+        </dd>
+
+        <dt>Descripción</dt>
+        <dd>
+          <p id="prodDescription"></p>
+        </dd>
+
+        <dt>Costo</dt>
+        <dd>
+          <p id="prodCurrency"></p>
+          <p id="prodCost"></p>
+        </dd>
+
+        <dt>Cantidad de vendidos</dt>
+        <dd>
+          <p id="prodSoldCount"></p>
+        </dd>
+        <br>
+
+        <hr class="my-3">
+        <br>
+        <h3>Comentarios</h3>
+      </dl>
     </div>
-  </div>
+
+    <div class="row">
+      <div class="container">
+        <div class="list-group" id="comments-list-container">
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <hr class="my-3">
+      <br>
+      <h3>Haz un comentario sobre el producto</h3>
+      <br>
+      <p>Puntaje:</p>
+      <select class="form-control" id="commScore">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+      <br>
+      <p>Cuerpo:</p>
+      <textarea class="form-control me-2" id="commDescription" cols="100" rows="6"></textarea>
+      <button class="btn btn-outline-success" type="submit" onclick="addComment()">Enviar</button>
+    </div>
+  </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
