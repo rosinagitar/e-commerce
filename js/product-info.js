@@ -8,24 +8,6 @@ let prodCurrency = document.getElementById("prodCurrency");
 let prodCost = document.getElementById("prodCost");
 let prodSoldCount = document.getElementById("prodSoldCount");
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) { /*Obtenemos toda la info del producto que está en JSON y la mostramos en HTML.*/
-        if (resultObj.status === "ok") {
-
-            product = resultObj.data;
-
-            prodName.innerHTML = product.name;
-            prodCategory.innerHTML = product.category;
-            prodDescription.innerHTML = product.description;
-            prodCurrency.innerHTML = product.currency + " " + product.cost;
-            prodSoldCount.innerHTML = product.soldCount;
-        }
-    });
-});
-
 /*Obtenemos la lista de comentarios que está en JSON y la mostramos en HTML.*/
 function showCommentsList() {
     let htmlContentToAppend = "";
@@ -55,8 +37,23 @@ function showCommentsList() {
     }
 }
 
+//Función que se ejecuta una vez que se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) { 
+        if (resultObj.status === "ok") {
+
+            product = resultObj.data;
+
+            prodName.innerHTML = product.name;
+            prodCategory.innerHTML = product.category;
+            prodDescription.innerHTML = product.description;
+            prodCurrency.innerHTML = product.currency + " " + product.cost;
+            prodSoldCount.innerHTML = product.soldCount;
+        }
+    });
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {/*Obtenemos toda la info de comentarios/producto que está en JSON y la mostramos en HTML.*/
         /*Si no hay error, se carga la lista y se muestra.*/
         if (resultObj.status === "ok") {
 
