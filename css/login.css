@@ -3,11 +3,11 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+background-image: url('https://obj.ca/sites/default/files/styles/article_main/public/2020-07/iStock-923079848%20-%20Edited.jpg?itok=9Thal91p');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
-font-family: 'Numans', sans-serif;
+font-family: 'Raleway', serif !important;
 }
 
 .container{
@@ -26,11 +26,11 @@ background-color: rgba(0,0,0,0.5) !important;
 .social_icon span{
 font-size: 60px;
 margin-left: 10px;
-color: #FFC312;
+color: white;
 }
 
 .social_icon span:hover{
-color: white;
+color: black;
 cursor: pointer;
 }
 
@@ -46,8 +46,8 @@ top: -45px;
 
 .input-group-prepend span{
 width: 50px;
-background-color: #FFC312;
-color: black;
+background-color: black;
+color: white;
 border:0 !important;
 }
 
@@ -70,8 +70,8 @@ margin-right: 5px;
 }
 
 .login_btn{
-color: black;
-background-color: #FFC312;
+color: white;
+background-color: black;
 width: 100px;
 }
 
@@ -86,4 +86,5 @@ color: white;
 
 .links a{
 margin-left: 4px;
+color: white;
 }

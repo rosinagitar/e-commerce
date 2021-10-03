@@ -161,10 +161,6 @@ a.custom-card:hover {
   font-family: 'Raleway';
 }
 
-.btn {
-  color: #0087F7;
-  border-color: #0087F7;
+.card {
+  margin: 10px;
 }
-
-.btn-outline-success:hover{color:#fff;background-color: #0087F7;border-color:#0087F7}
-

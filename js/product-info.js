@@ -1,18 +1,54 @@
 var product = [];
 var commentsArray = [];
+var productsArray = [];
+var relProductsArray = [];
+var imagesArray = [];
 
+/*Función para mostrar imágenes (formato carousel).*/
+function showProdImages() {
+    let htmlContentToAppend = "";
+    
+    /*Imágenes: se agregan los valores de la primera (active) dentro de un div en HTML.*/
+    htmlContentToAppend += `
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="` + imagesArray[0] + `" alt="First slide">
+        </div>`;
+
+    /*Indicadores: se agregan los valores del primero (active).*/  
+    let indicators = `<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>`;
+
+    for(let i = 1; i < imagesArray.length; i++) { /*Se recorre el arreglo imagesArray a partir de la posición 1.*/
+        let image = imagesArray[i];
+
+        /*Imágenes: se agregan los valores de las siguientes.*/
+        htmlContentToAppend += `
+        <div class="carousel-item">
+              <img class="d-block w-100" src="` + image + `" alt="` + i + `slide">
+            </div>`;
+
+        /*Indicadores: se agregan los valores de los siguientes en la var indicators.*/    
+        indicators += `<li data-target="#carouselExampleIndicators" data-slide-to="` + i + `"></li>`;
+    }
+
+    /*Se llama a los div= indicators y carousel del HTML y se le agregan todos los valores.*/
+    document.getElementById("indicators").innerHTML = indicators;
+    document.getElementById("carousel").innerHTML = htmlContentToAppend;
+}
+
+/*Info del producto: agrego la info contenida en las var en los div correspondientes del HTML.*/
 let prodName = document.getElementById("prodName");
 let prodCategory = document.getElementById("prodCategory");
 let prodDescription = document.getElementById("prodDescription");
 let prodCurrency = document.getElementById("prodCurrency");
 let prodCost = document.getElementById("prodCost");
 let prodSoldCount = document.getElementById("prodSoldCount");
+let prodImages = document.getElementById("prodImages");
 
-/*Obtenemos la lista de comentarios que está en JSON y la mostramos en HTML.*/
+/*Función para mostrar comentarios.*/
 function showCommentsList() {
     let htmlContentToAppend = "";
 
-    for (let i = 0; i < commentsArray.length; i++) { /*Se inicia un contador para recorrer el arreglo de productos currentProductsArray.*/
+    for (let i = 0; i < commentsArray.length; i++) { /*Se inicia un contador para recorrer el arreglo de comentarios commentsArray.*/
         let comment = commentsArray[i];
 
         /*Se agregan los valores del objeto dentro de un div en HTML.*/
@@ -36,33 +72,6 @@ function showCommentsList() {
         document.getElementById("comments-list-container").innerHTML = htmlContentToAppend;
     }
 }
-
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) { 
-        if (resultObj.status === "ok") {
-
-            product = resultObj.data;
-
-            prodName.innerHTML = product.name;
-            prodCategory.innerHTML = product.category;
-            prodDescription.innerHTML = product.description;
-            prodCurrency.innerHTML = product.currency + " " + product.cost;
-            prodSoldCount.innerHTML = product.soldCount;
-        }
-    });
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {/*Obtenemos toda la info de comentarios/producto que está en JSON y la mostramos en HTML.*/
-        /*Si no hay error, se carga la lista y se muestra.*/
-        if (resultObj.status === "ok") {
-
-            commentsArray = resultObj.data;
-
-            showCommentsList(commentsArray);
-        }
-    });
-});
 
 /*Función para agregar nuevo comentario.*/
 function addComment() {
@@ -112,7 +121,7 @@ function addComment() {
                 </div>
             </div>
             `
-/*Se llama al div= comments-list-container del HTML y se le agregan todos los valores del nuevo comentario.*/
+    /*Se llama al div= comments-list-container del HTML y se le agregan todos los valores del nuevo comentario.*/
     document.getElementById("comments-list-container").innerHTML += htmlContentToAppend;
     document.getElementById("commDescription").value = ""; /*Después de dar click, el campo "cuerpo" queda en blanco*/
 }
@@ -131,3 +140,66 @@ function drawStars(stars) {
 
     return htmlContentToAppend;
 }
+
+/*Función para mostrar productos relacionados (relatedProducts- PRODUCT_INFO_URL).*/
+function showRelatedProducts() {
+    let htmlContentToAppend = "";
+
+    for (let i = 0; i < relProductsArray.length; i++) { /*Se inicia un contador para recorrer el arreglo relProductsArray.*/
+        let relProduct = productsArray[relProductsArray[i]];
+
+        /*Se agregan los valores dentro de un div en HTML.*/
+        htmlContentToAppend += `
+        <div class="card" style="width: 18rem;">
+         <img class="card-img-top" src="`+ relProduct.imgSrc + `" alt="Card image cap">
+          <div class="card-body">
+           <h5 class="card-title">`+ relProduct.name + `</h5>
+           <p class="card-text">`+ relProduct.description + `</p>
+           <a href="product-info.html" class="btn btn-outline-dark">Ver</a>
+          </div>
+        </div>
+        `
+        /*Se llama al div= related-prod-container del HTML y se le agregan todos los valores de los prod relacionados.*/
+        document.getElementById("related-prod-container").innerHTML = htmlContentToAppend;
+    }
+}
+
+//Función que se ejecuta una vez que se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) { /*Obtenemos toda la info del producto (JSON) y la mostramos en HTML.*/
+        if (resultObj.status === "ok") { /*Si no hay error, se carga la lista y se muestra.*/
+
+            product = resultObj.data;
+
+            prodName.innerHTML = product.name;
+            prodCategory.innerHTML = product.category;
+            prodDescription.innerHTML = product.description;
+            prodCurrency.innerHTML = product.currency + " " + product.cost;
+            prodSoldCount.innerHTML = product.soldCount;
+            imagesArray = product.images;
+
+            showProdImages(imagesArray); /*Ejecutamos la función para mostrar imágenes.*/
+            
+            getJSONData(PRODUCTS_URL).then(function (resultObj) { /*Obtenemos toda la info de la lista de prod (JSON) y la mostramos en HTML.*/
+        if (resultObj.status === "ok") {
+
+            productsArray = resultObj.data;
+            relProductsArray = product.relatedProducts;
+
+            showRelatedProducts(productsArray, relProductsArray); /*Ejecutamos la función para mostrar prod relacionados.*/
+        }
+    });
+        }
+    });
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) { /*Obtenemos toda la info de los comentarios (JSON) y la mostramos en HTML.*/
+        if (resultObj.status === "ok") {
+
+            commentsArray = resultObj.data;
+
+            showCommentsList(commentsArray); /*Ejecutamos la función para mostrar comentarios.*/
+        }
+    });
+    
+});

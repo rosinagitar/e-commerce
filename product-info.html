@@ -39,17 +39,25 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Mi carrito</a>
-          </li>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
+          <button class="btn btn-outline-dark" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
         </form>
       </div>
-      <div id="user">
+
+      <div class="dropdown">
+        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="user" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="index.html" onclick="deleteUsername()">Cerrar sesión</a>
+        </div>
       </div>
+
     </div>
   </nav>
 
@@ -60,33 +68,24 @@
       <br>
       <dl>
         <dt>Imágenes ilustrativas</dt>
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100" src="img/prod1.jpg" alt="First slide">
+
+        <div class="container" id="prodImages">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators" id="indicators">
+            </ul>
+            <div class="carousel-inner" id="carousel">
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="img/prod1_1.jpg" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="img/prod1_2.jpg" alt="Third slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="img/prod1_3.jpg" alt="Fourth slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="img/prod1_4.jpg" alt="Fifth slide">
-            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
+
         <br>
 
         <dt>Categoría</dt>
@@ -142,7 +141,17 @@
       <br>
       <p>Cuerpo:</p>
       <textarea class="form-control me-2" id="commDescription" cols="100" rows="6"></textarea>
-      <button class="btn btn-outline-success" type="submit" onclick="addComment()">Enviar</button>
+      <button class="btn btn-outline-dark" type="submit" onclick="addComment()">Enviar</button>
+
+
+      <div class="container-fluid">
+        <br>
+        <hr class="my-3">
+        <br>
+        <h3>Productos relacionados</h3>
+        <div class="row" id="related-prod-container">
+        </div>
+      </div>
     </div>
   </main>
 

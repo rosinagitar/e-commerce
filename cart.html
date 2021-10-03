@@ -31,6 +31,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="css/dropzone.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -54,17 +55,21 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Mi carrito</a>
-          </li>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
+          <button class="btn btn-outline-dark" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
         </form>
       </div>
-      <div id="user">
-
+      <div class="dropdown">
+        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="index.html" onclick="deleteUsername()">Cerrar sesión</a>
+        </div>
       </div>
     </div>
   </nav>
