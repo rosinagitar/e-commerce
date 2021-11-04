@@ -29,8 +29,10 @@
     }
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="css/styles.css" rel="stylesheet">
-  <link href="css/dropzone.css" rel="stylesheet">
+
   <link href="css/font-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -38,7 +40,8 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">e-mercado</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
@@ -64,7 +67,8 @@
         </form>
       </div>
       <div class="dropdown">
-        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="user" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="cart.html">Mi carrito</a>
           <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
@@ -73,15 +77,62 @@
       </div>
     </div>
   </nav>
-  
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+  <div class="container">
+    <div class="text-center p-4">
+      <h2>Mi perfil</h2>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-8 order-md-1">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="required">Primer nombre</label>
+              <input type="text" class="form-control" autocomplete="off" id="firstName" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Segundo nombre</label>
+              <input type="text" class="form-control" autocomplete="off" id="secondName">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="required">Primer apellido</label>
+              <input type="text" class="form-control" autocomplete="off" id="firstSurname" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Segundo apellido</label>
+              <input type="text" class="form-control" autocomplete="off" id="secondSurname">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="required">E-mail</label>
+              <input type="email" class="form-control" autocomplete="off" id="emailAddress" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="required">Teléfono de contacto</label>
+              <input type="tel" class="form-control" id="telNumber" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Agrega una imagen</label>
+                <input type="file" id="inputSelectImage">
+                <img src="" id="imgPreview">
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <button class="btn btn-outline-dark" type="submit" id="saveChanges">Guardar cambios</button>
+        </form>
+      </div>
     </div>
   </div>
+
+  <br>
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
@@ -103,8 +154,17 @@
     </div>
   </div>
   <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/dropzone.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
 </body>
