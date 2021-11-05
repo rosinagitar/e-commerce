@@ -14,28 +14,20 @@ function savePersonalInfo() {
     localStorage.setItem("profile", JSON.stringify(personalInfo));
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-    document.getElementById("saveChanges").addEventListener("click", function (e) {
-        /*Después de hacer click en el botón de guardar cambios, se ejecuta la función.*/
-        savePersonalInfo();
-    });
-});
+/*Función para traer los valores guardados en localStorage y mostrarlos en cada input.*/
+function getSavedPersonalInfo() {
+    /*Convertimos el JSON guardado en localStorage a registro JS con parse para poder manejarlo y mostrar en cada input los valores guardados.*/
+    let personalInfo = JSON.parse(localStorage.getItem("profile"));
 
-/*Para traer los valores guardados en localStorage y mostrarlos en cada input.
-Convertimos el JSON guardado en localStorage a registro JS con parse para poder manejarlo y mostrar en cada input los valores guardados.*/
-let personalInfo = JSON.parse(localStorage.getItem("profile"));
-
-if (personalInfo != null) {
-    document.getElementById("firstName").value = personalInfo.firstName;
-    document.getElementById("secondName").value = personalInfo.secondName;
-    document.getElementById("firstSurname").value = personalInfo.firstSurname;
-    document.getElementById("secondSurname").value = personalInfo.secondSurname;
-    document.getElementById("emailAddress").value = personalInfo.emailAddress;
-    document.getElementById("telNumber").value = personalInfo.telNumber;
-};
+    if (personalInfo != null) {
+        document.getElementById("firstName").value = personalInfo.firstName;
+        document.getElementById("secondName").value = personalInfo.secondName;
+        document.getElementById("firstSurname").value = personalInfo.firstSurname;
+        document.getElementById("secondSurname").value = personalInfo.secondSurname;
+        document.getElementById("emailAddress").value = personalInfo.emailAddress;
+        document.getElementById("telNumber").value = personalInfo.telNumber;
+    };
+}
 
 /*Para poder subir una imagen desde el equipo.
 Llamamos al input de type= file. Evento change: cuando el usuario confirma un cambio en el valor de un elemento.*/
@@ -52,8 +44,19 @@ document.getElementById("inputSelectImage").addEventListener("change", function 
     reader.readAsDataURL(this.files[0]);
 });
 
-/*Para traer la imagen guardada en localStorage y mostrarla.*/
+//Función que se ejecuta una vez que se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
+    document.getElementById("saveChanges").addEventListener("click", function (e) {
+        /*Después de hacer click en el botón de guardar cambios, ejecutamos para guardar los datos en localStorage.*/
+        savePersonalInfo();
+    });
+
+    /*Después de cargar el contenido de DOM, ejecutamos para traer los valores guardados en localStorage y mostrarlos.*/
+    getSavedPersonalInfo();
+
+    /*Para traer la imagen guardada en localStorage y mostrarla.*/
     let recentImageDataUrl = localStorage.getItem("recentImage");
 
     /*Si hay una imagen cargada, se llama al img con src="" y se le setea la URL contenida en la var recentImageDataUrl.*/

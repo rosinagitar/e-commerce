@@ -173,3 +173,7 @@ a.custom-card:hover {
 #inputSelectImage {
   color: transparent;
 }
+
+div.container-fluid {
+  padding: 0px;
+}

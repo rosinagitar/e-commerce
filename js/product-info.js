@@ -11,7 +11,7 @@ function showProdImages() {
     /*Imágenes: se agregan los valores de la primera (active) dentro de un div en HTML.*/
     htmlContentToAppend += `
         <div class="carousel-item active">
-          <img class="d-block w-100" src="` + imagesArray[0] + `" alt="First slide">
+          <img class="d-block w-100 img-thumbnail" src="` + imagesArray[0] + `" alt="First slide">
         </div>`;
 
     /*Indicadores: se agregan los valores del primero (active).*/  
@@ -23,7 +23,7 @@ function showProdImages() {
         /*Imágenes: se agregan los valores de las siguientes.*/
         htmlContentToAppend += `
         <div class="carousel-item">
-              <img class="d-block w-100" src="` + image + `" alt="` + i + `slide">
+              <img class="d-block w-100 img-thumbnail" src="` + image + `" alt="` + i + `slide">
             </div>`;
 
         /*Indicadores: se agregan los valores de los siguientes en la var indicators.*/    
@@ -155,7 +155,7 @@ function showRelatedProducts() {
           <div class="card-body">
            <h5 class="card-title">`+ relProduct.name + `</h5>
            <p class="card-text">`+ relProduct.description + `</p>
-           <a href="product-info.html" class="btn btn-outline-dark">Ver</a>
+           <a href="product-info.html" class="btn btn-dark">Ver</a>
           </div>
         </div>
         `

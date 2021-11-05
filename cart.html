@@ -35,17 +35,17 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">e-mercado</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
-            <a class="nav-link" href="home.html">Inicio</a>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="home.html">Inicio<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -54,18 +54,18 @@
             <a class="nav-link" href="products.html">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sell.html" tabindex="-1" aria-disabled="true">Vender</a>
+            <a class="nav-link" href="sell.html">Vender</a>
           </li>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-          <button class="btn btn-outline-dark" type="submit">
+          <button class="btn btn-light" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </form>
       </div>
       <div class="dropdown">
-        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="user" data-toggle="dropdown"
+        <button class="btn btn-light dropdown-toggle" type="button" id="user" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="cart.html">Mi carrito</a>
@@ -73,8 +73,8 @@
           <a class="dropdown-item" href="index.html" onclick="deleteUsername()">Cerrar sesión</a>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <main role="main" class="pb-5">
     <div class="text-center p-4">
@@ -154,6 +154,63 @@
                 <input type="text" class="form-control">
               </div>
             </div>
+
+            <h5 class="mb-3">Forma de pago</h5>
+            <button type="button" class="m-1 btn btn-link" data-toggle="modal"
+              data-target="#contidionsModal">Seleccionar aquí</button>
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Forma de pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container p-0">
+                      <div class="card px-4">
+                        <p class="h8 py-3">Completá los siguientes datos</p>
+                        <div class="row gx-3">
+                          <div class="col-12">
+                            <div class="d-flex flex-column">
+                              <p class="text mb-1">Nombre completo</p> <input class="form-control mb-3" type="text"
+                                placeholder="Nombre que figura en la tarjeta">
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="d-flex flex-column">
+                              <p class="text mb-1">Número de tarjeta</p> <input class="form-control mb-3" type="number">
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="d-flex flex-column">
+                              <p class="text mb-1">Fecha de expiración</p> <input class="form-control mb-3"
+                                type="datetime" placeholder="MM/AAAA">
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="d-flex flex-column">
+                              <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="number"
+                                placeholder="***">
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="btn btn-dark mb-3"> <span class="ps-3">Pagar</span> <span
+                                class="fas fa-arrow-right"></span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </form>
         </div>
       </div>
