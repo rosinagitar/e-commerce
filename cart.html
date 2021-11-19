@@ -114,18 +114,18 @@
 
       <div class="row justify-content-md-center">
         <div class="col-md-8 order-md-1">
-          <form>
+          <form class="needs-validation" id="buy-form">
             <div class="d-block my-3">
               <h5 class="mb-3">Tipo de envío</h5>
               <div class="custom-control custom-radio">
-                <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked=""
+                <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked=""
                   required="">
-                <label class="custom-control-label" for="goldradio">Premium (2-5 días) - Costo del 15% sobre el
+                <label class="custom-control-label" for="premiumradio">Premium (2-5 días) - Costo del 15% sobre el
                   subtotal</label>
               </div>
               <div class="custom-control custom-radio">
-                <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="premiumradio">Express (5-8 días) - Costo del 7% sobre el
+                <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
+                <label class="custom-control-label" for="expressradio">Express (5-8 días) - Costo del 7% sobre el
                   subtotal</label>
               </div>
               <div class="custom-control custom-radio">
@@ -136,84 +136,79 @@
             </div>
 
             <br>
+            <hr>
+            <br>
+
+            <h5 class="mb-3">Costos</h5>
+            <ul class="list-group mb-3">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Subtotal</h6>
+                  <small class="text-muted">Suma de subtotales</small>
+                </div>
+                <span class="text-muted" id="subtotals">-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">Costo de envío</h6>
+                  <small class="text-muted">Según el tipo de envío seleccionado</small>
+                </div>
+                <span class="text-muted" id="shippingCost">-</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total ($)</span>
+                <strong id="totalCost">-</strong>
+              </li>
+            </ul>
+
+            <br>
+            <hr>
+            <br>
 
             <h5 class="mb-3">Dirección de envío</h5>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Calle</label>
-                <input type="text" class="form-control">
+                <label for="street" class="required">Calle</label>
+                <input type="text" class="form-control" id="street" placeholder="" value="">
+                <div class="invalid-feedback">
+                  Campo obligatorio
+                </div>
               </div>
               <div class="form-group col-md-6">
-                <label>Número</label>
-                <input type="text" class="form-control">
+                <label for="number" class="required">Número</label>
+                <input type="text" class="form-control" id="number" placeholder="" value="">
+                <div class="invalid-feedback">
+                  Campo obligatorio
+                </div>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Esquina</label>
-                <input type="text" class="form-control">
-              </div>
-            </div>
-
-            <h5 class="mb-3">Forma de pago</h5>
-            <button type="button" class="m-1 btn btn-link" data-toggle="modal"
-              data-target="#contidionsModal">Seleccionar aquí</button>
-
-            <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Forma de pago</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="container p-0">
-                      <div class="card px-4">
-                        <p class="h8 py-3">Completá los siguientes datos</p>
-                        <div class="row gx-3">
-                          <div class="col-12">
-                            <div class="d-flex flex-column">
-                              <p class="text mb-1">Nombre completo</p> <input class="form-control mb-3" type="text"
-                                placeholder="Nombre que figura en la tarjeta">
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <div class="d-flex flex-column">
-                              <p class="text mb-1">Número de tarjeta</p> <input class="form-control mb-3" type="number">
-                            </div>
-                          </div>
-                          <div class="col-6">
-                            <div class="d-flex flex-column">
-                              <p class="text mb-1">Fecha de expiración</p> <input class="form-control mb-3"
-                                type="datetime" placeholder="MM/AAAA">
-                            </div>
-                          </div>
-                          <div class="col-6">
-                            <div class="d-flex flex-column">
-                              <p class="text mb-1">CVV/CVC</p> <input class="form-control mb-3 pt-2 " type="number"
-                                placeholder="***">
-                            </div>
-                          </div>
-                          <div class="col-12">
-                            <div class="btn btn-dark mb-3"> <span class="ps-3">Pagar</span> <span
-                                class="fas fa-arrow-right"></span> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
-                  </div>
+                <label for="corner" class="required">Esquina</label>
+                <input type="text" class="form-control" id="corner" placeholder="" value="">
+                <div class="invalid-feedback">
+                  Campo obligatorio
                 </div>
               </div>
             </div>
 
-          </form>
+            <br>
+            <hr>
+            <br>
+
+            <h5 class="mb-3">Forma de pago</h5>
+            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#creditCardModal">Tarjeta de
+              crédito</button>
+            <button type="button" class="btn btn-dark" data-toggle="modal"
+              data-target="#wireTransferModal">Transferencia bancaria</button>
+
+            <hr class="mb-4">
+
+            <button class="btn btn-dark btn-lg" type="submit">Comprar</button>
         </div>
+        </form>
       </div>
+    </div>
     </div>
   </main>
 
@@ -226,6 +221,143 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="creditCardModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form class="needs-validation" id="credit-card-form">
+          <div class="modal-header">
+            <h5 class="modal-title">Tarjeta de crédito</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container p-0">
+              <div class="card px-4">
+                <p class="h8 py-3">Completá los siguientes datos</p>
+                <div class="row gx-3">
+                  <div class="col-12">
+                    <div class="d-flex flex-column">
+                      <label class="required">Nombre completo</label> <input class="form-control mb-3" id="completeName"
+                        type="text" placeholder="Nombre que figura en la tarjeta" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="d-flex flex-column">
+                      <label class="required">Número de tarjeta</label> <input class="form-control mb-3" id="cardNumber"
+                        type="number" placeholder="" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="d-flex flex-column">
+                      <label class="required">Fecha de expiración</label> <input class="form-control mb-3"
+                        id="expirationDate" type="datetime" placeholder="MM/AAAA" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="d-flex flex-column">
+                      <label class="required">CVV/CVC</label> <input class="form-control mb-3 pt-2 " id="cvv"
+                        type="number" placeholder="***" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div>
+                    <button class="btn btn-dark" type="submit">Pagar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="wireTransferModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form class="needs-validation" id="wire-transfer-form">
+          <div class="modal-header">
+            <h5 class="modal-title">Transferencia bancaria</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container p-0">
+              <div class="card px-4">
+                <p class="h8 py-3">Completá los siguientes datos</p>
+                <div class="row gx-3">
+                  <div class="col-12">
+                    <div class="d-flex flex-column">
+                      <label class="required">Nombre completo</label> <input class="form-control mb-3"
+                        id="completeName2" type="text" placeholder="Nombre/s y apellidos" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="d-flex flex-column">
+                      <label class="required">Cédula de identidad</label> <input class="form-control mb-3" id="idNumber"
+                        type="number" placeholder="Ej. 12345678" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="d-flex flex-column">
+                      <label class="required">E-mail</label> <input class="form-control mb-3" id="email" type="email"
+                        placeholder="Ej. emercado@example.com" value="">
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                    <p>Te enviaremos un mail con nuestros datos para que puedas realizar el pago
+                      correspondiente.</p>
+                  </div>
+                  <div class="col-12">
+                    <div>
+                      <button class="btn btn-dark" type="submit">Pagar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="alert fade" role="alert" id="alertMessage">
+    <span id="alertSpan"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 
   <div id="spinner-wrapper">
     <div class="lds-ring">

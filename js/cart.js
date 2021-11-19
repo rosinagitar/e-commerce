@@ -1,6 +1,12 @@
 let cartArray = [];
 let currency2 = "UYU";
 
+let shippingPercentage = 0.15;
+let total = 0;
+let subtotal = 0;
+let msgToShowHTML = document.getElementById("alertSpan");
+let msgToShow = "";
+
 /*Función para mostrar los productos del carrito. Creamos la var cost (guarda info de costo unitario y moneda convertidos -con función convert-)*/
 function showCart() {
   let htmlContentToAppend = "";
@@ -31,16 +37,8 @@ function showCart() {
     i++;
   }
 
-  htmlContentToAppend2 = `
-        <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><b>Suma de subtotales</b></td>
-        <td><h5 class="mb-3" id="subtotals"></h5></td>
-        </tr>`
-
-  document.getElementById("cart-container").innerHTML = htmlContentToAppend + htmlContentToAppend2;
+  document.getElementById("cart-container").innerHTML = htmlContentToAppend;
+  showShippingAndTotalCost();
 }
 
 /*Función para actualizar los subtotales al modificar la cantidad de productos. Seteamos en la var cost el valor del costo unitario ya convertido 
@@ -54,18 +52,21 @@ function updateSubtotal(i) {
 
   /*Mostramos la suma de todos los subtotales.*/
   allSubtotals();
+  /*Calculamos el costo de envío y el costo total.*/
+  showShippingAndTotalCost();
 }
 
-/*Función para sumar todos los subtotales. Seteamos en la var subtotal todo lo contenido en el id=subtotal+i.*/
+/*Función para sumar todos los subtotales. Seteamos en la var sub todo lo contenido en el id=subtotal+i.*/
 function allSubtotals() {
   htmlContentToAppend = "";
-  let subtotal = 0;
+  let sub = 0;
 
   for (let i = 1; i <= cartArray.length; i++) {
-    subtotal += parseFloat(document.getElementById("subtotal" + i).textContent); /*Aplicamos parseFloat para convertir a números con decimales.*/
+    sub += parseFloat(document.getElementById("subtotal" + i).textContent); /*Aplicamos parseFloat para convertir a números con decimales.*/
   }
   /*Pasamos la info al id=subtotals.*/
-  document.getElementById("subtotals").innerHTML = subtotal;
+  document.getElementById("subtotals").innerHTML = sub;
+  subtotal = sub;
 }
 
 /*Función para cambiar las monedas. A la var unitCost le seteamos los valores de los costos unitarios convertidos y a la var count el valor
@@ -84,6 +85,8 @@ function changeCurrency() {
 
   /*Mostramos la suma de todos los subtotales en la moneda seleccionada.*/
   allSubtotals();
+  /*Calculamos el costo de envío y el costo total en la moneda seleccionada.*/
+  showShippingAndTotalCost();
 }
 
 /*Función para convertir a diferentes monedas (UYU y USD).*/
@@ -103,6 +106,19 @@ function getCart(url) {
     });
 }
 
+/*Función para calcular costo de envío y costo total.*/
+function showShippingAndTotalCost() {
+  let shippingCostHTML = document.getElementById("shippingCost");
+  let totalCostHTML = document.getElementById("totalCost");
+
+  /*Guardamos las cuentas y sus resultados en variables y se los pasamos a cada elemento HTML.*/
+  let shippingCostToShow = Math.round(subtotal * shippingPercentage);
+  let totalCostToShow = Math.round(subtotal + (subtotal * shippingPercentage));
+
+  shippingCostHTML.innerHTML = shippingCostToShow;
+  totalCostHTML.innerHTML = totalCostToShow;
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -115,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       /*Muestro carrito y todos los subtotales.*/
       showCart();
       allSubtotals();
+      showShippingAndTotalCost();
 
       document.getElementById("uruguayanPesos").addEventListener("click", function (e) {
         currency2 = 'UYU'; /*La moneda seleccionada pasa a ser UYU.*/
@@ -128,4 +145,178 @@ document.addEventListener("DOMContentLoaded", function (e) {
         changeCurrency(); /*Transformo los valores a la moneda seleccionada.*/
       });
     });
+
+  /*Después de clickear cada radio button, cambiamos el valor del porcentaje que corresponda y ejecutamos la función.*/
+  document.getElementById("premiumradio").addEventListener("click", function (e) {
+    shippingPercentage = 0.15;
+    showShippingAndTotalCost();
+  });
+
+  document.getElementById("expressradio").addEventListener("click", function (e) {
+    shippingPercentage = 0.07;
+    showShippingAndTotalCost();
+  });
+
+  document.getElementById("standardradio").addEventListener("click", function (e) {
+    shippingPercentage = 0.05;
+    showShippingAndTotalCost();
+  });
+
+  /*Validaciones*/
+  let buyForm = document.getElementById("buy-form");
+  let creditCardForm = document.getElementById("credit-card-form");
+  let wireTransferForm = document.getElementById("wire-transfer-form");
+
+  /*Se validan los campos calle, número y esquina después de clickear el botón submit.*/
+  buyForm.addEventListener("submit", function (e) {
+    let streetInput = document.getElementById("street");
+    let numberInput = document.getElementById("number");
+    let cornerInput = document.getElementById("corner");
+
+    /*Usamos esta variable booleana para indicar que hay campos incompletos*/
+    let infoMissing = false;
+
+    streetInput.classList.remove('is-invalid');
+    numberInput.classList.remove('is-invalid');
+    cornerInput.classList.remove('is-invalid');
+
+    /*Si los campos están vacíos, se le agrega a cada input la clase invalid (se muestra: Campo obligatorio) y le pasamos el valor true 
+    a infoMissing.*/
+    if (streetInput.value === "") {
+      streetInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (numberInput.value === "") {
+      numberInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (cornerInput.value === "") {
+      cornerInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    /*Si no hay campos vacíos, al elemento HTML del alert le agregamos la clase alert-success (verde), mostramos el mensaje y borramos
+    los valores de los inputs.*/
+    if (!infoMissing) {
+      msgToShow = "¡Su compra se ha realizado con éxito!";
+      document.getElementById("alertMessage").classList.add('alert-success');
+      document.getElementById("street").value = "";
+      document.getElementById("number").value = "";
+      document.getElementById("corner").value = "";
+
+      /*Si falta completar alguno, al elemento HTML del alert le agregamos la clase alert-danger (rojo) y mostramos el mensaje.*/
+    } else if (infoMissing) {
+      msgToShow = "Debe completar campos vacíos";
+      document.getElementById('alertMessage').classList.add('alert-danger');
+    }
+
+    msgToShowHTML.innerHTML = msgToShow;
+    /*Al elemento HTML del alert le agregamos la clase show para que se muestre.*/
+    document.getElementById("alertMessage").classList.add('show');
+
+    if (e.preventDefault) e.preventDefault();
+    return false;
+  });
+
+  /*Se validan los campos de la modal de tarjeta de crédito.*/
+  creditCardForm.addEventListener("submit", function (e) {
+    let completeNameInput = document.getElementById("completeName");
+    let cardNumberInput = document.getElementById("cardNumber");
+    let expirationDateInput = document.getElementById("expirationDate");
+    let cvvInput = document.getElementById("cvv");
+
+    let infoMissing = false;
+
+    completeNameInput.classList.remove('is-invalid');
+    cardNumberInput.classList.remove('is-invalid');
+    expirationDateInput.classList.remove('is-invalid');
+    cvvInput.classList.remove('is-invalid');
+
+    if (completeNameInput.value === "") {
+      completeNameInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (cardNumberInput.value === "") {
+      cardNumberInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (expirationDateInput.value === "") {
+      expirationDateInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (cvvInput.value === "") {
+      cvvInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (!infoMissing) {
+      msgToShow = "¡Pago realizado con éxito!";
+      document.getElementById("alertMessage").classList.add('alert-success');
+      document.getElementById("completeName").value = "";
+      document.getElementById("cardNumber").value = "";
+      document.getElementById("expirationDate").value = "";
+      document.getElementById("cvv").value = "";
+
+    } else if (infoMissing) {
+      msgToShow = "Debe completar campos vacíos";
+      document.getElementById('alertMessage').classList.add('alert-danger');
+    }
+
+    msgToShowHTML.innerHTML = msgToShow
+    document.getElementById("alertMessage").classList.add('show');
+
+    if (e.preventDefault) e.preventDefault();
+    return false;
+  });
+
+  /*Se validan los campos de la modal de transferencia bancaria.*/
+  wireTransferForm.addEventListener("submit", function (e) {
+    let completeNameInput = document.getElementById("completeName2");
+    let idNumberInput = document.getElementById("idNumber");
+    let emailInput = document.getElementById("email");
+
+    let infoMissing = false;
+
+    completeNameInput.classList.remove('is-invalid');
+    idNumberInput.classList.remove('is-invalid');
+    emailInput.classList.remove('is-invalid');
+
+    if (completeNameInput.value === "") {
+      completeNameInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (idNumberInput.value === "") {
+      idNumberInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (emailInput.value === "") {
+      emailInput.classList.add('is-invalid');
+      infoMissing = true;
+    }
+
+    if (!infoMissing) {
+      msgToShow = "Ya podés realizar la transferencia";
+      document.getElementById("alertMessage").classList.add('alert-success');
+      document.getElementById("completeName2").value = "";
+      document.getElementById("idNumber").value = "";
+      document.getElementById("email").value = "";
+
+    } else if (infoMissing) {
+      msgToShow = "Debe completar campos vacíos";
+      document.getElementById('alertMessage').classList.add('alert-danger');
+    }
+
+    msgToShowHTML.innerHTML = msgToShow
+    document.getElementById("alertMessage").classList.add('show');
+
+    if (e.preventDefault) e.preventDefault();
+    return false;
+  })
 });
